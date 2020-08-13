@@ -1,0 +1,19 @@
+name: Conventional Commit Lint
+description: commitlint your PRs with conventional style config
+
+branding:
+  color: red
+  icon: search
+
+inputs:
+  token:
+    description: The GitHub token used to merge the pull-request
+    required: true
+
+runs:
+  using: docker
+  image: docker://ahmadnassri/action-conventional-commit-lint:v1
+
+outputs:
+  report:
+    description: a JSON object with the full `commitlint` report data
