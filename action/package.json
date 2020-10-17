@@ -22,7 +22,7 @@
     "@commitlint/config-lerna-scopes": "^11.0.0",
     "@commitlint/config-patternplate": "^11.0.0",
     "@commitlint/lint": "^11.0.0",
-    "@commitlint/load": "^9.1.1",
+    "@commitlint/load": "^11.0.0",
     "@octokit/rest": "^18.0.6"
   },
   "devDependencies": {
