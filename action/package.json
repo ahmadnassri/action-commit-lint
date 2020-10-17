@@ -19,7 +19,7 @@
     "@commitlint/config-angular": "^9.1.1",
     "@commitlint/config-angular-type-enum": "^9.1.1",
     "@commitlint/config-conventional": "^11.0.0",
-    "@commitlint/config-lerna-scopes": "^9.1.1",
+    "@commitlint/config-lerna-scopes": "^11.0.0",
     "@commitlint/config-patternplate": "^11.0.0",
     "@commitlint/lint": "^9.1.1",
     "@commitlint/load": "^9.1.1",
