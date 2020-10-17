@@ -23,7 +23,7 @@
     "@commitlint/config-patternplate": "^11.0.0",
     "@commitlint/lint": "^9.1.1",
     "@commitlint/load": "^9.1.1",
-    "@octokit/rest": "^18.0.3"
+    "@octokit/rest": "^18.0.6"
   },
   "devDependencies": {
     "sinon": "^9.0.3",
