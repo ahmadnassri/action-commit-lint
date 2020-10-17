@@ -18,7 +18,7 @@
     "@actions/core": "^1.2.6",
     "@commitlint/config-angular": "^9.1.1",
     "@commitlint/config-angular-type-enum": "^9.1.1",
-    "@commitlint/config-conventional": "^9.1.1",
+    "@commitlint/config-conventional": "^11.0.0",
     "@commitlint/config-lerna-scopes": "^9.1.1",
     "@commitlint/config-patternplate": "^9.1.1",
     "@commitlint/lint": "^9.1.1",
