@@ -16,7 +16,7 @@
   },
   "dependencies": {
     "@actions/core": "^1.2.6",
-    "@commitlint/config-angular": "^9.1.1",
+    "@commitlint/config-angular": "^11.0.0",
     "@commitlint/config-angular-type-enum": "^11.0.0",
     "@commitlint/config-conventional": "^11.0.0",
     "@commitlint/config-lerna-scopes": "^11.0.0",
