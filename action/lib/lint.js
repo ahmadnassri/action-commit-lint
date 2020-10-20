@@ -1,15 +1,22 @@
 const core = require('@actions/core')
+const { default: load } = require('@commitlint/load')
 const { default: lint } = require('@commitlint/lint')
-const { parserPreset, rules } = require('@commitlint/config-conventional')
+
+const CONFIG = {
+  extends: ['@commitlint/config-conventional']
+}
 
 module.exports = async function (commits) {
+  const { rules, parserPreset } = await load(CONFIG)
+  const rawOpts = parserPreset ? { parserOpts: parserPreset.parserOpts } : {}
+
   let fail = false
   const report = []
 
   for (const { sha, commit: { message } } of commits) {
     core.info(`${sha.slice(-7)}: ${message}`)
 
-    const result = await lint(message, rules, parserPreset)
+    const result = await lint(message, rules, rawOpts)
 
     if (result.errors.length > 0) {
       fail = true
