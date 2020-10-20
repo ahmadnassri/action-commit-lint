@@ -7,8 +7,8 @@ const CONFIG = {
 }
 
 module.exports = async function (commits) {
-  const { rules, parserPreset } = await load(CONFIG)
-  const rawOpts = parserPreset ? { parserOpts: parserPreset.parserOpts } : {}
+  const { rules, parserPreset: { parserOpts } } = await load(CONFIG)
+  const rawOpts = { parserOpts }
 
   let fail = false
   const report = []
