@@ -16,7 +16,10 @@ module.exports = async function (config = 'conventional', commits) {
   let fail = false
   const report = []
 
-  for (const { sha, commit: { message } } of commits) {
+  for (let { sha, id, commit, message } of commits) {
+    message = message || commit.message
+    sha = sha || id
+
     core.info(`${sha.slice(-7)}: ${message}`)
 
     const result = await lint(message, rules, rawOpts)
