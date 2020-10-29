@@ -6,8 +6,6 @@ const core = require('@actions/core')
 // module
 const lint = require('../lib/lint')
 
-const config = '@commitlint/config-conventional'
-
 const fixture = [{
   sha: 'ec26c3e57ca3a959ca5aad62de7213c562f8c821',
   commit: {
@@ -24,21 +22,20 @@ test('commits -> warnings', async assert => {
   sinon.stub(core, 'setFailed')
   sinon.stub(core, 'setOutput') // silence output on terminal
 
-  await lint(config, fixture)
+  await lint('conventional', fixture)
 
   assert.same(process.exitCode, null)
 
   assert.ok(core.info.called)
   assert.equal(core.info.getCall(0).args[0], '2f8c821: fix: some message\nbody')
-  core.info.restore()
-
   assert.notOk(core.error.called)
-  core.error.restore()
-
   assert.ok(core.warning.called)
   assert.equal(core.warning.getCall(0).args[0], '⚠ body must have leading blank line')
-  core.warning.restore()
-
   assert.notOk(core.setFailed.called)
+
+  core.info.restore()
+  core.error.restore()
+  core.warning.restore()
   core.setFailed.restore()
+  core.setOutput.restore()
 })

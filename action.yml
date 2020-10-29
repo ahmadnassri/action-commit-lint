@@ -11,8 +11,8 @@ inputs:
     default: ${{ github.token }}
 
   config:
-    description: shareable configuration to use
-    default: '@commitlint/config-conventional'
+    description: name of config to use, or path to config file
+    default: conventional
 
 outputs:
   report:

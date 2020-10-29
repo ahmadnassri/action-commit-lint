@@ -6,8 +6,6 @@ const core = require('@actions/core')
 // module
 const lint = require('../lib/lint')
 
-const config = '@commitlint/config-conventional'
-
 const fixture = [
   {
     sha: 'ec26c3e57ca3a959ca5aad62de7213c562f8c821',
@@ -31,18 +29,18 @@ test('commits -> valid', async assert => {
   sinon.stub(core, 'warning')
   sinon.stub(core, 'setOutput') // silence output on terminal
 
-  await lint(config, fixture)
+  await lint('conventional', fixture)
 
   assert.same(process.exitCode, null)
 
   assert.ok(core.info.called)
   assert.equal(core.info.getCall(0).args[0], '2f8c821: feat(readme): update readme.md')
   assert.equal(core.info.getCall(1).args[0], 'bf4c344: feat(food)!: add ice cream')
-  core.info.restore()
-
   assert.notOk(core.error.called)
-  core.error.restore()
-
   assert.notOk(core.warning.called)
+
+  core.info.restore()
+  core.error.restore()
   core.warning.restore()
+  core.setOutput.restore()
 })

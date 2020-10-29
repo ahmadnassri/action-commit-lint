@@ -1,13 +1,16 @@
+const { basename, dirname } = require('path')
+
 const core = require('@actions/core')
 const { default: load } = require('@commitlint/load')
 const { default: lint } = require('@commitlint/lint')
 
-module.exports = async function (config = '@commitlint/config-conventional', commits) {
-  const CONFIG = {
-    extends: [config]
-  }
+const builtInConfig = ['angular-type-enum', 'angular', 'conventional', 'lerna-scopes', 'patternplate']
 
-  const { rules, parserPreset } = await load(CONFIG)
+module.exports = async function (config = 'conventional', commits) {
+  const file = builtInConfig.includes(config) ? `config/${config}.js` : config
+  const cwd = builtInConfig.includes(config) ? __dirname : process.env.GITHUB_WORKSPACE
+
+  const { rules, parserPreset } = await load({}, { file, cwd })
   const rawOpts = parserPreset ? { parserOpts: parserPreset.parserOpts } : {}
 
   let fail = false
