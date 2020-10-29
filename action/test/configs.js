@@ -6,13 +6,6 @@ const core = require('@actions/core')
 // module
 const lint = require('../lib/lint')
 
-const fixture = [{
-  sha: 'ec26c3e57ca3a959ca5aad62de7213c562f8c821',
-  commit: {
-    message: 'feat: update README.md.'
-  }
-}]
-
 test('commits -> success', async assert => {
   assert.plan(1)
 
@@ -20,7 +13,12 @@ test('commits -> success', async assert => {
   sinon.stub(core, 'error')
   sinon.stub(core, 'setOutput') // silence output on terminal
 
-  await lint('angular-type-enum', fixture)
+  await lint('angular-type-enum', [{
+    sha: 'ec26c3e57ca3a959ca5aad62de7213c562f8c821',
+    commit: {
+      message: 'feat: update README.md.'
+    }
+  }])
 
   assert.notOk(core.error.called)
 
@@ -38,7 +36,12 @@ test('commits -> fail', async assert => {
   sinon.stub(core, 'setOutput') // silence output on terminal
   sinon.stub(process, 'exit')
 
-  await lint('conventional', fixture)
+  await lint('conventional', [{
+    sha: 'ec26c3e57ca3a959ca5aad62de7213c562f8c821',
+    commit: {
+      message: 'feat: update README.md.'
+    }
+  }])
 
   assert.ok(process.exit.called)
   assert.equal(process.exit.getCall(0).args[0], 1)
@@ -67,7 +70,12 @@ test('config -> custom', async assert => {
 
   process.env.GITHUB_WORKSPACE = __dirname
 
-  await lint('fixture.yml', fixture)
+  await lint('fixture.yml', [{
+    sha: 'ec26c3e57ca3a959ca5aad62de7213c562f8c821',
+    commit: {
+      message: 'feat: update README.md.'
+    }
+  }])
 
   assert.ok(process.exit.called)
   assert.equal(process.exit.getCall(0).args[0], 1)
@@ -83,4 +91,25 @@ test('config -> custom', async assert => {
   core.setFailed.restore()
   core.setOutput.restore()
   process.exit.restore()
+})
+
+test('configs -> undefined', async assert => {
+  assert.plan(1)
+
+  sinon.stub(core, 'info')
+  sinon.stub(core, 'error')
+  sinon.stub(core, 'setOutput') // silence output on terminal
+
+  await lint(undefined, [{
+    sha: 'ec26c3e57ca3a959ca5aad62de7213c562f8c821',
+    commit: {
+      message: 'feat: update README.md'
+    }
+  }])
+
+  assert.notOk(core.error.called)
+
+  core.info.restore()
+  core.error.restore()
+  core.setOutput.restore()
 })

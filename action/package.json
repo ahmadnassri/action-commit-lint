@@ -12,7 +12,7 @@
   "license": "MIT",
   "scripts": {
     "test": "tap test --no-coverage",
-    "test:100": "tap test --100 --coverage-report=lcov --no-browser"
+    "test:ci": "tap test --100 --coverage-report=lcov --no-browser"
   },
   "dependencies": {
     "@actions/core": "^1.2.6",
