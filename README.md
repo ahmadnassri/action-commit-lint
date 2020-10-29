@@ -1,29 +1,18 @@
-# GitHub Action: Commit Lint
+# GitHub Action: commitlint
+
+commitlint as a GitHub Action
 
 [![license][license-img]][license-url]
-[![version][version-img]][version-url]
-[![super linter][super-linter-img]][super-linter-url]
 [![release][release-img]][release-url]
-
-[license-url]: LICENSE
-[license-img]: https://badgen.net/github/license/ahmadnassri/action-commit-lint
-
-[version-url]: https://github.com/ahmadnassri/action-commit-lint/releases
-[version-img]: https://badgen.net//github/release/ahmadnassri/action-commit-lint
-
-[super-linter-url]: https://github.com/ahmadnassri/action-commit-lint/actions?query=workflow%3Asuper-linter
-[super-linter-img]: https://github.com/ahmadnassri/action-commit-lint/workflows/super-linter/badge.svg
-
-[release-url]: https://github.com/ahmadnassri/action-commit-lint/actions?query=workflow%3Arelease
-[release-img]: https://github.com/ahmadnassri/action-commit-lint/workflows/release/badge.svg
-
-Runs [`commitlint`](https://commitlint.js.org/) as a GitHub Action, a default configuration auto applied.
+[![super linter][super-linter-img]][super-linter-url]
+[![test][test-img]][test-url]
+[![semantic][semantic-img]][semantic-url]
 
 ## Usage
 
 ###### simple
 
-```yaml
+``` yaml
 name: commit-lint
 
 on: [push, pull_request]
@@ -38,7 +27,7 @@ jobs:
 
 ###### use different built-in config
 
-```yaml
+``` yaml
 name: commit-lint
 
 on: [push, pull_request]
@@ -55,7 +44,7 @@ jobs:
 
 ###### use your own rules
 
-```yaml
+``` yaml
 name: commit-lint
 
 on: [push, pull_request]
@@ -71,10 +60,11 @@ jobs:
           config: ./path/to/commitlint.config
 ```
 
-> **Notes** _for custom rules_:
-> - must use `action/checkout` first_
-> - `config` is relative to your repo's root
-> - config file format must follow [`commitlint` configuration format](https://commitlint.js.org/#/reference-configuration)
+> **Notes** *for custom rules*:
+> 
+>   - must use `action/checkout` first\_
+>   - `config` is relative to your repo's root
+>   - config file format must follow [`commitlint` configuration format](https://commitlint.js.org/#/reference-configuration)
 
 ### Inputs & Outputs
 
@@ -88,11 +78,27 @@ jobs:
 
 the following are available without any additional requirement
 
-- [`angular-type-enum`](https://github.com/conventional-changelog/commitlint/tree/master/%40commitlint/config-angular-type-enum)
-- [`angular`](https://github.com/conventional-changelog/commitlint/tree/master/%40commitlint/config-angular)
-- [`conventional`](https://github.com/conventional-changelog/commitlint/tree/master/%40commitlint/config-conventional)
-- [`lerna-scopes`](https://github.com/conventional-changelog/commitlint/tree/master/%40commitlint/config-lerna-scopes)
-- [`patternplate`](https://github.com/conventional-changelog/commitlint/tree/master/%40commitlint/config-patternplate)
+  - [`angular-type-enum`](https://github.com/conventional-changelog/commitlint/tree/master/%40commitlint/config-angular-type-enum)
+  - [`angular`](https://github.com/conventional-changelog/commitlint/tree/master/%40commitlint/config-angular)
+  - [`conventional`](https://github.com/conventional-changelog/commitlint/tree/master/%40commitlint/config-conventional)
+  - [`lerna-scopes`](https://github.com/conventional-changelog/commitlint/tree/master/%40commitlint/config-lerna-scopes)
+  - [`patternplate`](https://github.com/conventional-changelog/commitlint/tree/master/%40commitlint/config-patternplate)
 
+----
+> Author: [Ahmad Nassri](https://www.ahmadnassri.com/) &bull;
+> Twitter: [@AhmadNassri](https://twitter.com/AhmadNassri)
 
-[config]: https://commitlint.js.org/#/concepts-shareable-config
+[license-url]: LICENSE
+[license-img]: https://badgen.net/github/license/ahmadnassri/action-commit-lint
+
+[release-url]: https://github.com/ahmadnassri/action-commit-lint/releases
+[release-img]: https://badgen.net/github/release/ahmadnassri/action-commit-lint
+
+[super-linter-url]: https://github.com/ahmadnassri/action-commit-lint/actions?query=workflow%3Asuper-linter
+[super-linter-img]: https://github.com/ahmadnassri/action-commit-lint/workflows/super-linter/badge.svg
+
+[test-url]: https://github.com/ahmadnassri/action-commit-lint/actions?query=workflow%3Atest
+[test-img]: https://github.com/ahmadnassri/action-commit-lint/workflows/test/badge.svg
+
+[semantic-url]: https://github.com/ahmadnassri/action-commit-lint/actions?query=workflow%3Arelease
+[semantic-img]: https://badgen.net/badge/📦/semantically%20released/blue

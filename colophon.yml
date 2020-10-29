@@ -1,0 +1,8 @@
+version: 2.0
+
+id: action-commit-lint
+
+about:
+  title: "GitHub Action: commitlint"
+  description: commitlint as a GitHub Action
+  repository: ahmadnassri/action-commit-lint
