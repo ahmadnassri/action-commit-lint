@@ -1,8 +1,8 @@
 {
   "private": true,
-  "name": "actions-conventional-commit-lint",
+  "name": "actions-commit-lint",
   "version": "0.0.0-semantically-released",
-  "description": "commitlint your PRs with conventional style",
+  "description": "commitlint your PRs with a default configuration auto applied",
   "author": {
     "name": "Ahmad Nassri",
     "email": "ahmad@ahmadnassri.com",
@@ -16,14 +16,14 @@
   },
   "dependencies": {
     "@actions/core": "^1.2.6",
+    "@actions/github": "^4.0.0",
     "@commitlint/config-angular": "^11.0.0",
     "@commitlint/config-angular-type-enum": "^11.0.0",
     "@commitlint/config-conventional": "^11.0.0",
     "@commitlint/config-lerna-scopes": "^11.0.0",
     "@commitlint/config-patternplate": "^11.0.0",
     "@commitlint/lint": "^11.0.0",
-    "@commitlint/load": "^11.0.0",
-    "@octokit/rest": "^18.0.6"
+    "@commitlint/load": "^11.0.0"
   },
   "devDependencies": {
     "sinon": "^9.2.1",

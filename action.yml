@@ -1,19 +1,23 @@
 name: Conventional Commit Lint
-description: commitlint your PRs with conventional style config
+description: commitlint your PRs with a default configuration auto applied
 
 branding:
   color: red
   icon: search
 
 inputs:
-  token:
-    description: The GitHub token used to merge the pull-request
-    required: true
+  github-token:
+    description: The GitHub token used to inspect commits
+    default: ${{ github.token }}
 
-runs:
-  using: docker
-  image: docker://ahmadnassri/action-conventional-commit-lint:v1
+  config:
+    description: shareable configuration to use
+    default: '@commitlint/config-conventional'
 
 outputs:
   report:
     description: a JSON object with the full `commitlint` report data
+
+runs:
+  using: docker
+  image: docker://ghcr.io/ahmadnassri/action-commit-lint:v1

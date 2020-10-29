@@ -2,13 +2,13 @@ const core = require('@actions/core')
 const { default: load } = require('@commitlint/load')
 const { default: lint } = require('@commitlint/lint')
 
-const CONFIG = {
-  extends: ['@commitlint/config-conventional']
-}
+module.exports = async function (config = '@commitlint/config-conventional', commits) {
+  const CONFIG = {
+    extends: [config]
+  }
 
-module.exports = async function (commits) {
-  const { rules, parserPreset: { parserOpts } } = await load(CONFIG)
-  const rawOpts = { parserOpts }
+  const { rules, parserPreset } = await load(CONFIG)
+  const rawOpts = parserPreset ? { parserOpts: parserPreset.parserOpts } : {}
 
   let fail = false
   const report = []
