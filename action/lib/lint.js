@@ -1,5 +1,3 @@
-const { basename, dirname } = require('path')
-
 const core = require('@actions/core')
 const { default: load } = require('@commitlint/load')
 const { default: lint } = require('@commitlint/lint')
