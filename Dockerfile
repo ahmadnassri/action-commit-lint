@@ -13,4 +13,7 @@ COPY action ./
 
 RUN npm ci --only=prod
 
+# also install globally
+RUN npm i --global --only=prod
+
 ENTRYPOINT ["node", "/action/index.js"]
