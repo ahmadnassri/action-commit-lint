@@ -14,6 +14,8 @@ module.exports = async function (config = 'conventional', commits) {
   let fail = false
   const report = []
 
+  core.info(`config: ${config}`)
+
   for (let { sha, id, commit, message } of commits) {
     message = message || commit.message
     sha = sha || id

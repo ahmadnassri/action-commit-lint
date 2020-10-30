@@ -34,8 +34,8 @@ test('commits -> valid', async assert => {
   assert.same(process.exitCode, null)
 
   assert.ok(core.info.called)
-  assert.equal(core.info.getCall(0).args[0], '2f8c821: feat(readme): update readme.md')
-  assert.equal(core.info.getCall(1).args[0], 'bf4c344: feat(food)!: add ice cream')
+  assert.equal(core.info.getCall(1).args[0], '2f8c821: feat(readme): update readme.md')
+  assert.equal(core.info.getCall(2).args[0], 'bf4c344: feat(food)!: add ice cream')
   assert.notOk(core.error.called)
   assert.notOk(core.warning.called)
 

@@ -28,7 +28,7 @@ test('commits -> errors', async assert => {
   assert.equal(process.exit.getCall(0).args[0], 1)
 
   assert.ok(core.info.called)
-  assert.equal(core.info.getCall(0).args[0], '2f8c821: Update README.md')
+  assert.equal(core.info.getCall(1).args[0], '2f8c821: Update README.md')
 
   assert.ok(core.error.called)
   assert.equal(core.error.getCall(0).args[0], '✖ subject may not be empty')

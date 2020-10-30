@@ -27,7 +27,7 @@ test('commits -> warnings', async assert => {
   assert.same(process.exitCode, null)
 
   assert.ok(core.info.called)
-  assert.equal(core.info.getCall(0).args[0], '2f8c821: fix: some message\nbody')
+  assert.equal(core.info.getCall(1).args[0], '2f8c821: fix: some message\nbody')
   assert.notOk(core.error.called)
   assert.ok(core.warning.called)
   assert.equal(core.warning.getCall(0).args[0], '⚠ body must have leading blank line')

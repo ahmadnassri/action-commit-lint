@@ -7,7 +7,7 @@ const core = require('@actions/core')
 const lint = require('../lib/lint')
 
 test('commits -> success', async assert => {
-  assert.plan(1)
+  assert.plan(2)
 
   sinon.stub(core, 'info')
   sinon.stub(core, 'error')
@@ -20,6 +20,7 @@ test('commits -> success', async assert => {
     }
   }])
 
+  assert.equal(core.info.getCall(0).args[0], 'config: angular-type-enum')
   assert.notOk(core.error.called)
 
   core.info.restore()
@@ -60,7 +61,7 @@ test('commits -> fail', async assert => {
 })
 
 test('config -> custom', async assert => {
-  assert.plan(6)
+  assert.plan(7)
 
   sinon.stub(core, 'info')
   sinon.stub(core, 'error')
@@ -76,6 +77,8 @@ test('config -> custom', async assert => {
       message: 'feat: update README.md.'
     }
   }])
+
+  assert.equal(core.info.getCall(0).args[0], 'config: fixture.yml')
 
   assert.ok(process.exit.called)
   assert.equal(process.exit.getCall(0).args[0], 1)

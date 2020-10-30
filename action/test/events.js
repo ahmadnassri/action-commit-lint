@@ -24,7 +24,7 @@ test('event -> PR', async assert => {
   assert.same(process.exitCode, null)
 
   assert.ok(core.info.called)
-  assert.equal(core.info.getCall(0).args[0], '2f8c821: feat(readme): update readme.md')
+  assert.equal(core.info.getCall(1).args[0], '2f8c821: feat(readme): update readme.md')
   assert.notOk(core.error.called)
   assert.notOk(core.warning.called)
 
@@ -50,7 +50,7 @@ test('event -> push', async assert => {
   assert.same(process.exitCode, null)
 
   assert.ok(core.info.called)
-  assert.equal(core.info.getCall(0).args[0], '2f8c821: feat(readme): update readme.md')
+  assert.equal(core.info.getCall(1).args[0], '2f8c821: feat(readme): update readme.md')
   assert.notOk(core.error.called)
   assert.notOk(core.warning.called)
 
