@@ -11,9 +11,10 @@ WORKDIR /action
 
 COPY action ./
 
-RUN npm ci --only=prod
+# install packages globally
+RUN node /action/install.js
 
-# also install globally
-RUN npm i --global --only=prod
+# install locally
+RUN npm ci --only=prod
 
 ENTRYPOINT ["node", "/action/index.js"]
