@@ -61,15 +61,15 @@ jobs:
 ```
 
 > **Notes** *for custom rules*:
-> 
->   - must use `action/checkout` first\_
->   - `config` is relative to your repo's root
->   - config file format must follow [`commitlint` configuration format](https://commitlint.js.org/#/reference-configuration)
+>
+> -   must use `action/checkout` first\_
+> -   `config` is relative to your repo's root
+> -   config file format must follow [`commitlint` configuration format](https://commitlint.js.org/#/reference-configuration)
 
 ### Inputs & Outputs
 
 | output         | type   | required | default        | description                                               |
-| -------------- | ------ | -------- | -------------- | --------------------------------------------------------- |
+|----------------|--------|----------|----------------|-----------------------------------------------------------|
 | `github-token` | input  | ❌        | `-`            | The GitHub token used to inspect the pull-request commits |
 | `config`       | input  | ❌        | `conventional` | name of config to use, or path to config file             |
 | `report`       | output | `N/A`    | `-`            | a JSON object with the full `commitlint` report data      |
@@ -78,11 +78,11 @@ jobs:
 
 the following are available without any additional requirement
 
-  - [`angular-type-enum`](https://github.com/conventional-changelog/commitlint/tree/master/%40commitlint/config-angular-type-enum)
-  - [`angular`](https://github.com/conventional-changelog/commitlint/tree/master/%40commitlint/config-angular)
-  - [`conventional`](https://github.com/conventional-changelog/commitlint/tree/master/%40commitlint/config-conventional)
-  - [`lerna-scopes`](https://github.com/conventional-changelog/commitlint/tree/master/%40commitlint/config-lerna-scopes)
-  - [`patternplate`](https://github.com/conventional-changelog/commitlint/tree/master/%40commitlint/config-patternplate)
+-   [`angular-type-enum`](https://github.com/conventional-changelog/commitlint/tree/master/%40commitlint/config-angular-type-enum)
+-   [`angular`](https://github.com/conventional-changelog/commitlint/tree/master/%40commitlint/config-angular)
+-   [`conventional`](https://github.com/conventional-changelog/commitlint/tree/master/%40commitlint/config-conventional)
+-   [`lerna-scopes`](https://github.com/conventional-changelog/commitlint/tree/master/%40commitlint/config-lerna-scopes)
+-   [`patternplate`](https://github.com/conventional-changelog/commitlint/tree/master/%40commitlint/config-patternplate)
 
 ----
 > Author: [Ahmad Nassri](https://www.ahmadnassri.com/) &bull;
