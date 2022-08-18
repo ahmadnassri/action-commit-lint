@@ -15,7 +15,7 @@
     "test:ci": "tap test --100 --coverage-report=lcov --no-browser"
   },
   "dependencies": {
-    "@actions/core": "^1.2.6",
+    "@actions/core": "^1.9.1",
     "@actions/github": "^4.0.0",
     "@commitlint/config-angular": "^12.0.1",
     "@commitlint/config-angular-type-enum": "^12.0.1",
