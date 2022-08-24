@@ -7,7 +7,7 @@ const lint = require('./lib/lint.js')
 
 // exit early
 if (!['pull_request', 'push'].includes(github.context.eventName)) {
-  core.error('action triggered outside of a push / pull_request')
+  core.warning('action triggered outside of a push / pull_request')
   process.exit(0) // soft exit
 }
 
