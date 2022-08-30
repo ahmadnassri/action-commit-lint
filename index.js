@@ -1,9 +1,9 @@
 // packages
-import core from '@actions/core'
-import github from '@actions/github'
+const core = require('@actions/core')
+const github = require('@actions/github')
 
 // modules
-import lint from './lib/lint.js'
+const lint = require('./lib/lint.js')
 
 // exit early
 if (!['pull_request', 'push'].includes(github.context.eventName)) {
