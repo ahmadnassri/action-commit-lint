@@ -83927,7 +83927,7 @@ async function main () {
   // handle Pul Requests
   if (github.context.eventName === 'pull_request') {
     // fetch commits
-    const { data } = await octokit.pulls.listCommits({
+    const { data } = await octokit.rest.pulls.listCommits({
       ...github.context.repo,
       pull_number: payload.pull_request.number
     })
@@ -83937,7 +83937,7 @@ async function main () {
     commits.push(...payload.commits)
   }
 
-  if (commits.lengh === 0) {
+  if (commits.length === 0) {
     core.error('no commits found')
     process.exit(0) // soft exit
   }
