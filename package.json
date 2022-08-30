@@ -28,7 +28,7 @@
   },
   "main": "index.js",
   "scripts": {
-    "build": "microbundle --no-pkg-main --no-sourcemap --external none --target node --format esm --entry index.js --output dist/index.js",
+    "build": "ncc build index.js --minify --out dist --no-source-map-register",
     "test": "tap test --no-coverage",
     "test:watch": "tap test --watch",
     "test:ci": "tap test --100",
@@ -46,7 +46,7 @@
     "@commitlint/load": "^17.1.2"
   },
   "devDependencies": {
-    "microbundle": "^0.15.1",
+    "@vercel/ncc": "^0.34.0",
     "sinon": "^14.0.0",
     "tap": "^16.3.0"
   }

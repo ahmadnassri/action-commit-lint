@@ -4,7 +4,7 @@ const sinon = require('sinon')
 const core = require('@actions/core')
 
 // module
-const lint = require('../lib/lint')
+const lint = require('../lib/lint.js')
 
 const fixture = [
   {
@@ -39,8 +39,5 @@ test('commits -> valid', async assert => {
   assert.notOk(core.error.called)
   assert.notOk(core.warning.called)
 
-  core.info.restore()
-  core.error.restore()
-  core.warning.restore()
-  core.setOutput.restore()
+  sinon.restore()
 })
