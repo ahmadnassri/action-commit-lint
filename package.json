@@ -1,0 +1,53 @@
+{
+  "private": true,
+  "name": "actions-commit-lint",
+  "version": "0.0.0-semantically-released",
+  "description": "commitlint your PRs with a default configuration auto applied",
+  "author": "Ahmad Nassri <email@ahmadnassri.com> (https://www.ahmadnassri.com)",
+  "homepage": "https://github.com/ahmadnassri/action-commit-lint",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/ahmadnassri/action-commit-lint.git"
+  },
+  "bugs": {
+    "url": "https://github.com/ahmadnassri/action-commit-lint/issues"
+  },
+  "funding": {
+    "type": "individual",
+    "url": "https://github.com/sponsors/ahmadnassri"
+  },
+  "license": "MIT",
+  "keywords": [
+    "github",
+    "action",
+    "commit",
+    "lint"
+  ],
+  "engines": {
+    "node": ">=14"
+  },
+  "main": "index.js",
+  "scripts": {
+    "build": "microbundle --no-pkg-main --no-sourcemap --external none --target node --format esm --entry index.js --output dist/index.js",
+    "test": "tap test --no-coverage",
+    "test:watch": "tap test --watch",
+    "test:ci": "tap test --100",
+    "test:report": "opener coverage/lcov-report/index.html"
+  },
+  "dependencies": {
+    "@actions/core": "^1.9.1",
+    "@actions/github": "^5.0.3",
+    "@commitlint/config-angular": "^17.1.0",
+    "@commitlint/config-angular-type-enum": "^17.0.0",
+    "@commitlint/config-conventional": "^17.1.0",
+    "@commitlint/config-lerna-scopes": "^17.0.2",
+    "@commitlint/config-patternplate": "^17.1.0",
+    "@commitlint/lint": "^17.1.0",
+    "@commitlint/load": "^17.1.2"
+  },
+  "devDependencies": {
+    "microbundle": "^0.15.1",
+    "sinon": "^14.0.0",
+    "tap": "^16.3.0"
+  }
+}
