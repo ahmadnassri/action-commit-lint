@@ -29,7 +29,7 @@
   "main": "index.js",
   "scripts": {
     "prebuild": "scripts/prepare.sh",
-    "build": "ncc build index.js --out dist --no-cache",
+    "build": "ncc build index.js --minify --out dist --no-cache",
     "test": "tap test --no-coverage",
     "test:watch": "tap test --watch",
     "test:ci": "tap test --100",

@@ -13,12 +13,13 @@ test('commits -> success', async assert => {
   sinon.stub(core, 'error')
   sinon.stub(core, 'setOutput') // silence output on terminal
 
-  await lint('angular-type-enum', [{
-    sha: 'ec26c3e57ca3a959ca5aad62de7213c562f8c821',
-    commit: {
-      message: 'feat: update README.md.'
-    }
-  }])
+  await lint({
+    config: 'angular-type-enum',
+    commits: [{
+      sha: 'ec26c3e57ca3a959ca5aad62de7213c562f8c821',
+      commit: { message: 'feat: update README.md.' }
+    }]
+  })
 
   assert.equal(core.info.getCall(0).args[0], 'config: angular-type-enum')
   assert.notOk(core.error.called)
@@ -37,12 +38,13 @@ test('commits -> fail', async assert => {
   sinon.stub(core, 'setOutput') // silence output on terminal
   sinon.stub(process, 'exit')
 
-  await lint('conventional', [{
-    sha: 'ec26c3e57ca3a959ca5aad62de7213c562f8c821',
-    commit: {
-      message: 'feat: update README.md.'
-    }
-  }])
+  await lint({
+    config: 'conventional',
+    commits: [{
+      sha: 'ec26c3e57ca3a959ca5aad62de7213c562f8c821',
+      commit: { message: 'feat: update README.md.' }
+    }]
+  })
 
   assert.ok(process.exit.called)
   assert.equal(process.exit.getCall(0).args[0], 1)
@@ -69,16 +71,18 @@ test('config -> custom', async assert => {
   sinon.stub(core, 'setOutput') // silence output on terminal
   sinon.stub(process, 'exit')
 
-  process.env.GITHUB_WORKSPACE = __dirname
+  await lint({
+    cwd: __dirname,
+    config: 'fixtures/config.yml',
+    commits:[{
+      sha: 'ec26c3e57ca3a959ca5aad62de7213c562f8c821',
+      commit: {
+        message: 'feat: update README.md.'
+      }
+    }]
+  })
 
-  await lint('fixture.yml', [{
-    sha: 'ec26c3e57ca3a959ca5aad62de7213c562f8c821',
-    commit: {
-      message: 'feat: update README.md.'
-    }
-  }])
-
-  assert.equal(core.info.getCall(0).args[0], 'config: fixture.yml')
+  assert.equal(core.info.getCall(0).args[0], 'config: fixtures/config.yml')
 
   assert.ok(process.exit.called)
   assert.equal(process.exit.getCall(0).args[0], 1)
@@ -103,12 +107,12 @@ test('configs -> undefined', async assert => {
   sinon.stub(core, 'error')
   sinon.stub(core, 'setOutput') // silence output on terminal
 
-  await lint(undefined, [{
-    sha: 'ec26c3e57ca3a959ca5aad62de7213c562f8c821',
-    commit: {
-      message: 'feat: update README.md'
-    }
-  }])
+  await lint({
+    commits: [{
+      sha: 'ec26c3e57ca3a959ca5aad62de7213c562f8c821',
+      commit: { message: 'feat: update README.md' }
+    }]
+  })
 
   assert.notOk(core.error.called)
 

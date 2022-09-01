@@ -55,7 +55,10 @@ async function main () {
   }
 
   // process commits
-  await lint(inputs.config, commits)
+  await lint({
+    config: inputs.config,
+    commits
+  })
 }
 
 main()

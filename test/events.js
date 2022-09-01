@@ -14,12 +14,13 @@ test('event -> PR', async assert => {
   sinon.stub(core, 'warning')
   sinon.stub(core, 'setOutput') // silence output on terminal
 
-  await lint('conventional', [{
-    sha: 'ec26c3e57ca3a959ca5aad62de7213c562f8c821',
-    commit: {
-      message: 'feat(readme): update readme.md'
-    }
-  }])
+  await lint({
+    config: 'conventional',
+    commits: [{
+      sha: 'ec26c3e57ca3a959ca5aad62de7213c562f8c821',
+      commit: { message: 'feat(readme): update readme.md' }
+    }]
+  })
 
   assert.same(process.exitCode, null)
 
@@ -42,10 +43,13 @@ test('event -> push', async assert => {
   sinon.stub(core, 'warning')
   sinon.stub(core, 'setOutput') // silence output on terminal
 
-  await lint('conventional', [{
-    id: 'ec26c3e57ca3a959ca5aad62de7213c562f8c821',
-    message: 'feat(readme): update readme.md'
-  }])
+  await lint({
+    config: 'conventional',
+    commits: [{
+      id: 'ec26c3e57ca3a959ca5aad62de7213c562f8c821',
+      message: 'feat(readme): update readme.md'
+    }]
+  })
 
   assert.same(process.exitCode, null)
 

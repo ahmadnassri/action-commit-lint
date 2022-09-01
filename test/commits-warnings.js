@@ -6,7 +6,7 @@ const core = require('@actions/core')
 // module
 const lint = require('../lib/lint.js')
 
-const fixture = [{
+const commits = [{
   sha: 'ec26c3e57ca3a959ca5aad62de7213c562f8c821',
   commit: {
     message: 'fix: some message\nbody'
@@ -22,7 +22,7 @@ test('commits -> warnings', async assert => {
   sinon.stub(core, 'setFailed')
   sinon.stub(core, 'setOutput') // silence output on terminal
 
-  await lint('conventional', fixture)
+  await lint({ config: 'conventional', commits })
 
   assert.same(process.exitCode, null)
 
