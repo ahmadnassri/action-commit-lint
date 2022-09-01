@@ -28,7 +28,8 @@
   },
   "main": "index.js",
   "scripts": {
-    "build": "ncc build index.js --minify --out dist --no-source-map-register",
+    "prebuild": "scripts/prepare.sh",
+    "build": "ncc build index.js --out dist --no-cache",
     "test": "tap test --no-coverage",
     "test:watch": "tap test --watch",
     "test:ci": "tap test --100",
