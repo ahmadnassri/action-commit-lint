@@ -1,6 +1,6 @@
-# -------------------------------------------------- #
-# Note: this file originates in template-action-node #
-# -------------------------------------------------- #
+# ---------------------------------------------------- #
+# Note: this file originates in template-action-docker #
+# ---------------------------------------------------- #
 
 on:
   - push
@@ -16,9 +16,9 @@ jobs:
     runs-on: ubuntu-latest
 
     outputs:
+      image-name: ${{ steps.image.outputs.name }}
       repository_is_template: ${{ steps.metadata.outputs.repository_is_template }}
       repository_default_branch: ${{ steps.metadata.outputs.repository_default_branch }}
-
 
     steps:
       - uses: actions/checkout@v3
@@ -26,15 +26,18 @@ jobs:
       - id: metadata
         uses: ahmadnassri/action-metadata@v2.1.1
 
+      - id: image
+        run: echo "::set-output name=name::$(basename "${GITHUB_REPOSITORY/docker-//}")"
+
   commit-lint:
     timeout-minutes: 5
 
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v3.0.2
 
-      - uses: ahmadnassri/action-commit-lint@v2
+      - uses: ahmadnassri/action-commit-lint@v1
         with:
           config: .github/linters/.commit-lint.yml
 
@@ -46,14 +49,14 @@ jobs:
     steps:
       - uses: actions/checkout@v3.0.2
 
-      - uses: oxsecurity/megalinter/flavors/javascript@v6
+      - uses: oxsecurity/megalinter@v6
         env:
           GITHUB_TOKEN: ${{ github.token }}
           MEGALINTER_CONFIG: .github/linters/.mega-linter.yml
           GITHUB_COMMENT_REPORTER: true
           GITHUB_STATUS_REPORTER: true
 
-      - uses: actions/upload-artifact@v2
+      - uses: actions/upload-artifact@v3
         if: ${{ success() }} || ${{ failure() }}
         with:
           name: mega-linter-reports
@@ -61,48 +64,8 @@ jobs:
             megalinter-reports
             mega-linter.log
 
-  npm-audit:
-    timeout-minutes: 5
-
-    runs-on: ubuntu-latest
-
-    steps:
-      - uses: actions/checkout@v3
-
-      - uses: actions/setup-node@v3.4.1
-        with:
-          node-version: latest
-
-      - run: npm audit --audit-level=critical
-
-  test:
-    needs:
-      - npm-audit
-
-    timeout-minutes: 5
-
-    runs-on: ubuntu-latest
-
-    steps:
-      - uses: actions/checkout@v3
-        with:
-          submodules: true
-
-      - uses: actions/setup-node@v3.4.1
-        with:
-          registry-url: https://npm.pkg.github.com
-          node-version: latest
-          cache: npm
-
-      - run: npm ci
-        env:
-          NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-
-      - run: npm run test:ci
-
   release:
     needs:
-      - test
       - metadata
       - commit-lint
       - mega-linter
@@ -112,7 +75,7 @@ jobs:
       needs.metadata.outputs.repository_is_template == 'false' &&
       needs.metadata.outputs.repository_default_branch == github.ref_name
 
-    timeout-minutes: 20
+    timeout-minutes: 5
 
     runs-on: ubuntu-latest
 
@@ -123,7 +86,7 @@ jobs:
       version-minor: ${{ steps.release.outputs.release-version-minor }}
 
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v3.0.2
         with:
           submodules: true
 
@@ -132,7 +95,50 @@ jobs:
         with:
           config: ${{ github.workspace }}/.semantic.json
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_TOKEN: ${{ github.token }}
+
+  publish-docker:
+    needs:
+      - release
+      - metadata
+
+    timeout-minutes: 10
+
+    if: ${{ needs.release.outputs.published == 'true' }}
+
+    name: publish to ghcr.io
+
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v3.0.2
+      - uses: docker/setup-qemu-action@v2
+      - uses: docker/setup-buildx-action@v2
+
+      # login to registry
+      - uses: docker/login-action@v2
+        with:
+          registry: ghcr.io
+          username: ${{ github.repository_owner }}
+          password: ${{ github.token }}
+
+      # publish
+      - uses: docker/build-push-action@v3
+        with:
+          push: true
+          cache-from: type=gha
+          cache-to: type=gha,mode=max
+          platforms: linux/amd64,linux/arm64,linux/arm/v7
+          tags: |
+            ghcr.io/${{ github.repository_owner }}/${{ needs.metadata.outputs.image-name }}:latest
+            ghcr.io/${{ github.repository_owner }}/${{ needs.metadata.outputs.image-name }}:${{ needs.release.outputs.version-major }}
+            ghcr.io/${{ github.repository_owner }}/${{ needs.metadata.outputs.image-name }}:${{ needs.release.outputs.version }}
+          labels: |
+            org.opencontainers.image.title=${{ needs.metadata.outputs.image-name }}
+            org.opencontainers.image.url=${{ github.event.repository.html_url }}
+            org.opencontainers.image.version=${{ needs.release.outputs.version }}
+            org.opencontainers.image.source=${{ github.event.repository.html_url }}
+            org.opencontainers.image.revision=${{ github.sha }}
 
   alias:
     needs: release
@@ -155,10 +161,9 @@ jobs:
             await github.rest.git.createRef({ ...context.repo, ref: `refs/${tag}` , sha: process.env.GITHUB_SHA })
 
   template-sync:
-    timeout-minutes: 20
+    timeout-minutes: 5
 
     needs:
-      - test
       - metadata
       - commit-lint
       - mega-linter
@@ -171,7 +176,7 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v3.0.2
 
       - uses: ahmadnassri/action-template-repository-sync@v2
         with:
