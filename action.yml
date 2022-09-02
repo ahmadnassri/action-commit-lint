@@ -19,5 +19,5 @@ outputs:
     description: a JSON object with the full `commitlint` report data
 
 runs:
-  using: node16
-  main: dist/index.js
+  using: docker
+  image: docker://ghcr.io/ahmadnassri/action-commit-lint:v1

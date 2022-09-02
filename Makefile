@@ -1,31 +1,32 @@
 #!/usr/bin/make
 
-# -------------------------------------------------- #
-# Note: this file originates in template-action-node #
-# -------------------------------------------------- #
-
-NPMRC := $(shell npm config get userconfig)
-
-# Docker
+# ---------------------------------------------------- #
+# Note: this file originates in template-action-docker #
+# ---------------------------------------------------- #
 
 pull: ## pull latest containers
 	@docker compose pull
 
-readme: ## pull latest containers
-	@docker compose run --rm readme
-
-lint: ## run super-linter
+lint: clean ## run mega-linter
 	@docker compose run --rm lint
 
-install: ## install all dependencies
-	@docker compose run --rm -e NPM_TOKEN=$(NPM_TOKEN) -e GITHUB_TOKEN=$(GITHUB_TOKEN) -v $(NPMRC):/root/.npmrc node npm install --no-fund --no-audit
+readme: clean ## run readme action
+	@docker compose run --rm readme
 
-test: ## run all npm tests
-	@docker compose --profile test up
+start: ## start the project in foreground
+	@docker compose up --renew-anon-volumes app
 
-clean: ## remove running containers, volumes, node_modules & anything else
-	@docker compose rm --force -v
-	@rm -rf node_modules coverage .nyc_output
+build: clean ## start the project in background
+	@docker compose build --no-cache app
+
+shell: ## start the container shell
+	@docker compose run --rm --entrypoint /bin/sh app
+
+stop: ## stop all running containers
+	@docker compose down --remove-orphans --rmi local
+
+clean: stop ## remove running containers, volumes, node_modules & anything else
+	@docker compose rm --stop --volumes --force
 
 # Utility methods
 ## Help: https://marmelab.com/blog/2016/02/29/auto-documented-makefile.html

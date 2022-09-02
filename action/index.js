@@ -3,7 +3,7 @@ const core = require('@actions/core')
 const github = require('@actions/github')
 
 // modules
-const lint = require('./lib/lint.js')
+const lint = require('../lib/lint.js')
 
 // exit early
 if (!['pull_request', 'push'].includes(github.context.eventName)) {

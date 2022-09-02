@@ -28,8 +28,6 @@
   },
   "main": "index.js",
   "scripts": {
-    "prebuild": "scripts/prepare.sh",
-    "build": "ncc build index.js --minify --out dist --no-cache",
     "test": "tap test --no-coverage",
     "test:watch": "tap test --watch",
     "test:ci": "tap test --100",
@@ -47,7 +45,6 @@
     "@commitlint/load": "^17.1.2"
   },
   "devDependencies": {
-    "@vercel/ncc": "^0.34.0",
     "sinon": "^14.0.0",
     "tap": "^16.3.0"
   }

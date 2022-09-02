@@ -72,8 +72,7 @@ test('config -> custom', async assert => {
   sinon.stub(process, 'exit')
 
   await lint({
-    cwd: __dirname,
-    config: 'fixtures/config.yml',
+    config: 'test/fixtures/config.yml',
     commits:[{
       sha: 'ec26c3e57ca3a959ca5aad62de7213c562f8c821',
       commit: {
@@ -82,7 +81,7 @@ test('config -> custom', async assert => {
     }]
   })
 
-  assert.equal(core.info.getCall(0).args[0], 'config: fixtures/config.yml')
+  assert.equal(core.info.getCall(0).args[0], 'config: test/fixtures/config.yml')
 
   assert.ok(process.exit.called)
   assert.equal(process.exit.getCall(0).args[0], 1)

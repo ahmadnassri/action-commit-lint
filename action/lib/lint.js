@@ -1,17 +1,15 @@
 const core = require('@actions/core')
-const load = require('@commitlint/load').default
-const lint = require('@commitlint/lint').default
+const load = require('@commitlint/load')
+const lint = require('@commitlint/lint')
 
-const builtInConfig = {
-  'lerna-scopes': require('@commitlint/config-lerna-scopes'),
-  'angular-type-enum': require('@commitlint/config-angular-type-enum'),
-  angular: require('@commitlint/config-angular'),
-  conventional: require('@commitlint/config-conventional'),
-  patternplate: require('@commitlint/config-patternplate')
-}
+const builtInConfig = ['angular-type-enum', 'angular', 'conventional', 'lerna-scopes', 'patternplate']
 
-module.exports = async function ({ commits, config = 'conventional', cwd = process.env.GITHUB_WORKSPACE }) {
-  const { rules, parserPreset } = builtInConfig.hasOwnProperty(config) ? builtInConfig[config] : await load({}, { file: config, cwd })
+module.exports = async function ({ commits, config = 'conventional' }) {
+
+  const file = builtInConfig.includes(config) ? `./config/${config}.js` : config
+  const cwd = builtInConfig.includes(config) ? __dirname : process.env.GITHUB_WORKSPACE
+
+  const { rules, parserPreset } = await load.default({}, { file, cwd })
   const rawOpts = parserPreset ? { parserOpts: parserPreset.parserOpts } : {}
 
   let fail = false
@@ -25,7 +23,7 @@ module.exports = async function ({ commits, config = 'conventional', cwd = proce
 
     core.info(`${sha.slice(-7)}: ${message}`)
 
-    const result = await lint(message, rules, rawOpts)
+    const result = await lint.default(message, rules, rawOpts)
 
     if (result.errors.length > 0) {
       fail = true
