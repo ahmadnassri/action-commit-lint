@@ -87,8 +87,6 @@ jobs:
 
     steps:
       - uses: actions/checkout@v3.0.2
-        with:
-          token: ${{ secrets.GH_TOKEN }}
 
       - id: release-check
         uses: ahmadnassri/action-semantic-release@v2.1.4
