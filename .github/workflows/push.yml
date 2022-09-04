@@ -91,15 +91,15 @@ jobs:
           token: ${{ secrets.GH_TOKEN }}
 
       - id: version-bump
-        uses: ahmadnassri/action-semantic-release@v2.1.0
+        uses: ahmadnassri/action-semantic-release@v2.1.1
         with:
-          dry: 'true'
+          dry: true
           config: ${{ github.workspace }}/.semantic.json
         env:
           GITHUB_TOKEN: ${{ github.token }}
 
       - name: update action.yml
-        run: sed -i 's/${{ needs.metadata.outputs.image-name }}:.*/${{ needs.metadata.outputs.image-name }}:${{ steps.release.outputs.release-version }}/g' action.yml
+        run: sed -i 's/${{ needs.metadata.outputs.image-name }}:.*/${{ needs.metadata.outputs.image-name }}:${{ steps.version-bump.outputs.release-version }}/g' action.yml
 
       - name: commit changes
         run: |
@@ -110,7 +110,7 @@ jobs:
           git push
 
       - id: release
-        uses: ahmadnassri/action-semantic-release@v2.1.0
+        uses: ahmadnassri/action-semantic-release@v2.1.1
         with:
           config: ${{ github.workspace }}/.semantic.json
         env:
