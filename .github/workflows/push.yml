@@ -87,12 +87,11 @@ jobs:
 
     steps:
       - uses: actions/checkout@v3.0.2
-        with:
-          submodules: true
 
       - id: version-bump
         uses: ahmadnassri/action-semantic-release@v2.1.0
         with:
+          dry: true
           config: ${{ github.workspace }}/.semantic.json
         env:
           GITHUB_TOKEN: ${{ github.token }}
