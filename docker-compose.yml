@@ -27,5 +27,7 @@ services:
     profiles: ["app"]
     privileged: true
     build: .
+    volumes:
+      - ./:/src
     env_file:
       - .env

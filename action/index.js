@@ -3,7 +3,7 @@ const core = require('@actions/core')
 const github = require('@actions/github')
 
 // modules
-const lint = require('../lib/lint.js')
+const lint = require('./lib/lint.js')
 
 // exit early
 if (!['pull_request', 'push'].includes(github.context.eventName)) {
@@ -11,21 +11,27 @@ if (!['pull_request', 'push'].includes(github.context.eventName)) {
   process.exit(0) // soft exit
 }
 
-// parse inputs
-const inputs = {
-  token: core.getInput('github-token', { required: true }),
-  config: core.getInput('config', { required: true })
-}
-
 // error handler
 function errorHandler ({ message, stack }) {
-  core.error(`${message}\n${stack}`)
+  core.error(message)
+  core.debug(stack)
   process.exit(1)
 }
 
 // catch errors and exit
 process.on('unhandledRejection', errorHandler)
 process.on('uncaughtException', errorHandler)
+
+// backward compatibility locally
+if (!process.env.INPUT_TOKEN && process.env['INPUT_GITHUB-TOKEN']) {
+  process.env.INPUT_TOKEN = process.env['INPUT_GITHUB-TOKEN']
+}
+
+// parse inputs
+const inputs = {
+  token: core.getInput('token', { required: true }),
+  config: core.getInput('config', { required: true })
+}
 
 // extract the pull_request
 const { payload } = github.context // eslint-disable-line camelcase

@@ -22,7 +22,7 @@ test('commits -> errors', async assert => {
   sinon.stub(core, 'setOutput') // silence output on terminal
   sinon.stub(process, 'exit')
 
-  await lint({config: 'conventional', commits })
+  await lint({ config: 'conventional', commits })
 
   assert.ok(process.exit.called)
   assert.equal(process.exit.getCall(0).args[0], 1)

@@ -5,7 +5,6 @@ const lint = require('@commitlint/lint')
 const builtInConfig = ['angular-type-enum', 'angular', 'conventional', 'lerna-scopes', 'patternplate']
 
 module.exports = async function ({ commits, config = 'conventional' }) {
-
   const file = builtInConfig.includes(config) ? `./config/${config}.js` : config
   const cwd = builtInConfig.includes(config) ? __dirname : process.env.GITHUB_WORKSPACE
 

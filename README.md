@@ -66,11 +66,11 @@ jobs:
 
 ### Inputs & Outputs
 
-| output         | type   | required | default        | description                                               |
-|----------------|--------|----------|----------------|-----------------------------------------------------------|
-| `github-token` | input  | ❌       | `-`            | The GitHub token used to inspect the pull-request commits |
-| `config`       | input  | ❌       | `conventional` | name of config to use, or path to config file             |
-| `report`       | output | `N/A`    | `-`            | a JSON object with the full `commitlint` report data      |
+| output   | type   | required | default        | description                                               |
+|----------|--------|----------|----------------|-----------------------------------------------------------|
+| `token`  | input  | ❌       | `-`            | The GitHub token used to inspect the pull-request commits |
+| `config` | input  | ❌       | `conventional` | name of config to use, or path to config file             |
+| `report` | output | `N/A`    | `-`            | a JSON object with the full `commitlint` report data      |
 
 #### built-in configs
 

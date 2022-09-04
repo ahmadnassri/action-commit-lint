@@ -4,6 +4,8 @@
 # Note: this file originates in template-action-docker #
 # ---------------------------------------------------- #
 
+SHELL := /bin/bash
+
 pull: ## pull latest containers
 	@docker compose pull
 
@@ -14,7 +16,7 @@ readme: clean ## run readme action
 	@docker compose run --rm readme
 
 start: ## start the project in foreground
-	@docker compose up --renew-anon-volumes app
+	@docker compose run $(shell env | grep DOCKER | sed -E 's/DOCKER_(.*?)=(.*)/-e \1="\2"/gm;t;d') app
 
 build: clean ## start the project in background
 	@docker compose build --no-cache app

@@ -6,7 +6,7 @@ branding:
   icon: search
 
 inputs:
-  github-token:
+  token:
     description: The GitHub token used to inspect commits
     default: ${{ github.token }}
 

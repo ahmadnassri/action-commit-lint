@@ -57,11 +57,11 @@ jobs:
 
 ### Inputs & Outputs
 
-| output         | type   | required | default        | description                                               |
-| -------------- | ------ | -------- | -------------- | --------------------------------------------------------- |
-| `github-token` | input  | ❌        | `-`            | The GitHub token used to inspect the pull-request commits |
-| `config`       | input  | ❌        | `conventional` | name of config to use, or path to config file             |
-| `report`       | output | `N/A`    | `-`            | a JSON object with the full `commitlint` report data      |
+| output    | type   | required | default        | description                                               |
+| --------- | ------ | -------- | -------------- | --------------------------------------------------------- |
+| `token`   | input  | ❌       | `-`            | The GitHub token used to inspect the pull-request commits |
+| `config`  | input  | ❌       | `conventional` | name of config to use, or path to config file             |
+| `report`  | output | `N/A`    | `-`            | a JSON object with the full `commitlint` report data      |
 
 #### built-in configs
 
@@ -72,6 +72,5 @@ the following are available without any additional requirement
 - [`conventional`](https://github.com/conventional-changelog/commitlint/tree/master/%40commitlint/config-conventional)
 - [`lerna-scopes`](https://github.com/conventional-changelog/commitlint/tree/master/%40commitlint/config-lerna-scopes)
 - [`patternplate`](https://github.com/conventional-changelog/commitlint/tree/master/%40commitlint/config-patternplate)
-
 
 [config]: https://commitlint.js.org/#/concepts-shareable-config

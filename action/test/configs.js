@@ -73,7 +73,7 @@ test('config -> custom', async assert => {
 
   await lint({
     config: 'test/fixtures/config.yml',
-    commits:[{
+    commits: [{
       sha: 'ec26c3e57ca3a959ca5aad62de7213c562f8c821',
       commit: {
         message: 'feat: update README.md.'
