@@ -91,7 +91,7 @@ jobs:
           token: ${{ secrets.GH_TOKEN }}
 
       - id: release-check
-        uses: ahmadnassri/action-semantic-release@v2.1.1
+        uses: ahmadnassri/action-semantic-release@v2.1.4
         with:
           dry: true
           config: ${{ github.workspace }}/.semantic.json
@@ -114,7 +114,7 @@ jobs:
           git push
 
       - id: release
-        uses: ahmadnassri/action-semantic-release@v2.1.1
+        uses: ahmadnassri/action-semantic-release@v2.1.4
         with:
           config: ${{ github.workspace }}/.semantic.json
         env:
