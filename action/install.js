@@ -3,7 +3,6 @@
 const { dependencies } = require('./package.json')
 const { spawn } = require('node:child_process')
 
-const args = ['--no-fund', '--no-audit']
 const opts = { stdio: 'inherit' }
 
 const packages = Object.entries(dependencies)
@@ -14,8 +13,8 @@ const packages = Object.entries(dependencies)
 
 // install @commitlint dependencies globally
 for (const name of packages) {
-  spawn('npm', ['install', '--global', ...args, name], opts)
+  spawn('npm', ['install', '--global', name], opts)
 }
 
 // instally local
-spawn('npm', ['ci', '--omit=dev', ...args], opts)
+spawn('npm', ['ci', '--omit=dev'], opts)
