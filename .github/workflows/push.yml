@@ -87,6 +87,8 @@ jobs:
 
     steps:
       - uses: actions/checkout@v3.0.2
+        with:
+          token: ${{ secrets.GH_TOKEN }}
 
       - id: version-bump
         uses: ahmadnassri/action-semantic-release@v2.1.0
@@ -101,8 +103,6 @@ jobs:
 
       - name: commit changes
         run: |
-          git config user.name semantic-release
-          git config user.email semantic-release@github.com
           git add action.yml
           git commit -m "chore: version bump"
           git push
