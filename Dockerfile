@@ -1,4 +1,4 @@
-FROM node:slim
+FROM node:18-slim
 
 LABEL com.github.actions.name="Conventional Commit Lint" \
       com.github.actions.description="commitlint your PRs with Conventional style" \

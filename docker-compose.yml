@@ -27,7 +27,8 @@ services:
     profiles: ["app"]
     privileged: true
     build: .
+    working_dir: /github/workspace
     volumes:
-      - ./:/src
+      - ./:/github/workspace
     env_file:
       - .env
