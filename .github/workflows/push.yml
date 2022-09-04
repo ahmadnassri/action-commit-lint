@@ -69,7 +69,6 @@ jobs:
       - metadata
       - commit-lint
       - mega-linter
-      - version-bump
 
     # only runs on main branch for non template repos
     if: |
@@ -99,7 +98,7 @@ jobs:
           GITHUB_TOKEN: ${{ github.token }}
 
       - name: update action.yml
-        run: sed -i 's/${{ needs.metadata.outputs.image-name }}:v.*/${{ needs.metadata.outputs.image-name }}:v${{ steps.release.outputs.release-version }}/g' action.yml
+        run: sed -i 's/${{ needs.metadata.outputs.image-name }}:.*/${{ needs.metadata.outputs.image-name }}:${{ steps.release.outputs.release-version }}/g' action.yml
 
       - name: commit changes
         run: |
