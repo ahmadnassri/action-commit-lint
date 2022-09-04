@@ -20,4 +20,4 @@ outputs:
 
 runs:
   using: docker
-  image: docker://ghcr.io/ahmadnassri/action-commit-lint:
+  image: docker://ghcr.io/ahmadnassri/action-commit-lint:2.0.0
