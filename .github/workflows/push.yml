@@ -103,6 +103,8 @@ jobs:
 
       - name: commit changes
         run: |
+          git config user.name github-actions
+          git config user.email github-actions@github.com
           git add action.yml
           git commit -m "chore: version bump"
           git push
