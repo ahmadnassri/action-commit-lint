@@ -98,6 +98,7 @@ jobs:
 
       - id: bump
         name: update action.yml
+        if: ${{ steps.release-check.outputs.release-version }}
         run: |
           sed -i 's/${{ needs.metadata.outputs.image-name }}:.*/${{ needs.metadata.outputs.image-name }}:${{ steps.release-check.outputs.release-version }}/g' action.yml
           [[ `git status --porcelain --untracked-files=no` ]] && echo '::set-output name=changed::yes' || exit 0
