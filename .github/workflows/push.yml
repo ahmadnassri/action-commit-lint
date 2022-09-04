@@ -90,7 +90,7 @@ jobs:
         with:
           token: ${{ secrets.GH_TOKEN }}
 
-      - id: version-bump
+      - id: release-check
         uses: ahmadnassri/action-semantic-release@v2.1.1
         with:
           dry: true
@@ -98,10 +98,14 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ github.token }}
 
-      - name: update action.yml
-        run: sed -i 's/${{ needs.metadata.outputs.image-name }}:.*/${{ needs.metadata.outputs.image-name }}:${{ steps.version-bump.outputs.release-version }}/g' action.yml
+      - id: bump
+        name: update action.yml
+        run: |
+          sed -i 's/${{ needs.metadata.outputs.image-name }}:.*/${{ needs.metadata.outputs.image-name }}:${{ steps.release-check.outputs.release-version }}/g' action.yml
+          [[ `git diff --quiet --exit-code action.yml` ]] && echo '::set-output name=changed::yes' || exit 0
 
       - name: commit changes
+        if: ${{ steps.bump.outputs.dockerfile == 'yes' }}
         run: |
           git config user.name github-actions
           git config user.email github-actions@github.com
