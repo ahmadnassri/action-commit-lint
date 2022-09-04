@@ -140,26 +140,6 @@ jobs:
             org.opencontainers.image.source=${{ github.event.repository.html_url }}
             org.opencontainers.image.revision=${{ github.sha }}
 
-  alias:
-    needs: release
-
-    if: ${{ needs.release.outputs.published == 'true' }}
-
-    runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        alias:
-          - version: v${{ needs.release.outputs.version-major }}
-          - version: v${{ needs.release.outputs.version-major }}.${{ needs.release.outputs.version-minor }}
-
-    steps:
-      - uses: actions/github-script@v6
-        with:
-          script: |
-            const tag = 'tags/${{ matrix.alias.version }}'
-            await github.rest.git.deleteRef({ ...context.repo, ref: tag }).catch(() => {})
-            await github.rest.git.createRef({ ...context.repo, ref: `refs/${tag}` , sha: process.env.GITHUB_SHA })
-
   template-sync:
     timeout-minutes: 5
 
