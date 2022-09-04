@@ -100,7 +100,7 @@ jobs:
         name: update action.yml
         run: |
           sed -i 's/${{ needs.metadata.outputs.image-name }}:.*/${{ needs.metadata.outputs.image-name }}:${{ steps.release-check.outputs.release-version }}/g' action.yml
-          [[ `git status --porcelain` ]] && echo '::set-output name=changed::yes' || exit 0
+          [[ `git status --porcelain --untracked-files=no` ]] && echo '::set-output name=changed::yes' || exit 0
 
       - name: commit changes
         if: ${{ steps.bump.outputs.changed == 'yes' }}
