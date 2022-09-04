@@ -88,31 +88,7 @@ jobs:
     steps:
       - uses: actions/checkout@v3.0.2
         with:
-          token: ${{ secrets.GH_TOKEN }}
-
-      - id: release-check
-        uses: ahmadnassri/action-semantic-release@v2.1.4
-        with:
-          dry: true
-          config: ${{ github.workspace }}/.semantic.json
-        env:
-          GITHUB_TOKEN: ${{ github.token }}
-
-      - id: bump
-        name: update action.yml
-        if: ${{ steps.release-check.outputs.release-version }}
-        run: |
-          sed -i 's/${{ needs.metadata.outputs.image-name }}:.*/${{ needs.metadata.outputs.image-name }}:${{ steps.release-check.outputs.release-version }}/g' action.yml
-          [[ `git status --porcelain --untracked-files=no` ]] && echo '::set-output name=changed::yes' || exit 0
-
-      - name: commit changes
-        if: ${{ steps.bump.outputs.changed == 'yes' }}
-        run: |
-          git config user.name github-actions
-          git config user.email github-actions@github.com
-          git add action.yml
-          git commit -m "chore: version bump"
-          git push
+          submodules: true
 
       - id: release
         uses: ahmadnassri/action-semantic-release@v2.1.4
