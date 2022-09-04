@@ -49,7 +49,7 @@ jobs:
     steps:
       - uses: actions/checkout@v3.0.2
 
-      - uses: oxsecurity/megalinter@v6
+      - uses: oxsecurity/megalinter/flavors/javascript@v6.8.0
         env:
           GITHUB_TOKEN: ${{ github.token }}
           MEGALINTER_CONFIG: .github/linters/.mega-linter.yml
@@ -93,7 +93,7 @@ jobs:
       - id: version-bump
         uses: ahmadnassri/action-semantic-release@v2.1.0
         with:
-          dry: true
+          dry: 'true'
           config: ${{ github.workspace }}/.semantic.json
         env:
           GITHUB_TOKEN: ${{ github.token }}
