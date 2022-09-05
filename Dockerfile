@@ -1,14 +1,20 @@
-FROM node:18-slim
+# --- base stage --- #
 
-LABEL com.github.actions.name="Conventional Commit Lint" \
-      com.github.actions.description="commitlint your PRs with Conventional style" \
-      com.github.actions.icon="search" \
-      com.github.actions.color="red" \
-      maintainer="Ahmad Nassri <ahmad@ahmadnassri.com>"
+FROM alpine:3.16 AS base
 
-# set working dir
-RUN mkdir /action
+RUN apk add --no-cache --update nodejs
+
+RUN addgroup -S node && adduser -S node -G node
+
 WORKDIR /action
+
+ENTRYPOINT [ "node" ]
+
+# --- build stage --- #
+
+FROM base AS build
+
+RUN apk add --no-cache npm
 
 # slience npm
 RUN npm config set update-notifier=false audit=false fund=false
@@ -18,8 +24,24 @@ COPY action/package* ./
 COPY action/install.js ./
 RUN node install.js
 
-# copy files
-COPY action ./
+# --- app stage --- #
 
-# set entry point
-ENTRYPOINT ["node", "/action/index.js"]
+FROM base AS app
+
+LABEL com.github.actions.name="Conventional Commit Lint" \
+      com.github.actions.description="commitlint your PRs with Conventional style" \
+      com.github.actions.icon="search" \
+      com.github.actions.color="red" \
+      maintainer="Ahmad Nassri <ahmad@ahmadnassri.com>"
+
+
+# copy from build image
+COPY --from=build /usr/local/lib/node_modules /usr/lib/node
+COPY --from=build --chown=node:node /action/node_modules ./node_modules
+
+# copy files
+COPY --chown=node:node action ./
+
+USER node
+
+CMD ["/action/index.js"]

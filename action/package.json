@@ -24,7 +24,7 @@
     "lint"
   ],
   "engines": {
-    "node": ">=18"
+    "node": ">=16"
   },
   "main": "index.js",
   "scripts": {
