@@ -2,7 +2,8 @@
 
 FROM alpine:3.16 AS base
 
-RUN apk add --no-cache --update nodejs>16
+# hadolint ignore=DL3018
+RUN apk add --no-cache --update nodejs
 
 RUN addgroup -S node && adduser -S node -G node
 
@@ -14,9 +15,11 @@ ENTRYPOINT [ "node" ]
 
 FROM base AS build
 
-RUN apk add --no-cache npm>8
+# hadolint ignore=DL3018
+RUN apk add --no-cache npm
 
 # slience npm
+# hadolint ignore=DL3059
 RUN npm config set update-notifier=false audit=false fund=false
 
 # install packages
