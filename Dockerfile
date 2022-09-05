@@ -2,7 +2,7 @@
 
 FROM alpine:3.16 AS base
 
-RUN apk add --no-cache --update nodejs
+RUN apk add --no-cache --update nodejs>16
 
 RUN addgroup -S node && adduser -S node -G node
 
@@ -14,7 +14,7 @@ ENTRYPOINT [ "node" ]
 
 FROM base AS build
 
-RUN apk add --no-cache npm
+RUN apk add --no-cache npm>8
 
 # slience npm
 RUN npm config set update-notifier=false audit=false fund=false
@@ -33,7 +33,6 @@ LABEL com.github.actions.name="Conventional Commit Lint" \
       com.github.actions.icon="search" \
       com.github.actions.color="red" \
       maintainer="Ahmad Nassri <ahmad@ahmadnassri.com>"
-
 
 # copy from build image
 COPY --from=build /usr/local/lib/node_modules /usr/lib/node
