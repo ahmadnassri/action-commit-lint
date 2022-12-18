@@ -5,8 +5,6 @@ FROM alpine:3.16 AS base
 # hadolint ignore=DL3018
 RUN apk add --no-cache --update nodejs
 
-RUN addgroup -S node && adduser -S node -G node
-
 WORKDIR /action
 
 ENTRYPOINT [ "node" ]
@@ -39,11 +37,9 @@ LABEL com.github.actions.name="Conventional Commit Lint" \
 
 # copy from build image
 COPY --from=build /usr/local/lib/node_modules /usr/lib/node
-COPY --from=build --chown=node:node /action/node_modules ./node_modules
+COPY --from=build /action/node_modules ./node_modules
 
 # copy files
-COPY --chown=node:node action ./
-
-USER node
+COPY action ./
 
 CMD ["/action/index.js"]
