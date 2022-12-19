@@ -27,7 +27,7 @@ jobs:
         uses: ahmadnassri/action-metadata@v2.1.2
 
       - id: image
-        run: echo "name=$(basename "${GITHUB_REPOSITORY/docker-//}")" >> "$GITHUB_OUTPUT"
+        run: echo "name=$(basename "${GITHUB_REPOSITORY/docker-//}")" >> $GITHUB_OUTPUT
 
   commit-lint:
     timeout-minutes: 5
@@ -37,7 +37,7 @@ jobs:
     steps:
       - uses: actions/checkout@v3.0.2
 
-      - uses: ahmadnassri/action-commit-lint@v2.0.4
+      - uses: ahmadnassri/action-commit-lint@v2.0.3
         with:
           config: .github/linters/.commit-lint.yml
 
