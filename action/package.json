@@ -42,7 +42,7 @@
     "@commitlint/config-lerna-scopes": "^17.4.0",
     "@commitlint/config-patternplate": "^17.4.0",
     "@commitlint/lint": "^17.4.0",
-    "@commitlint/load": "^17.3.0"
+    "@commitlint/load": "^17.4.0"
   },
   "devDependencies": {
     "sinon": "^15.0.1",
