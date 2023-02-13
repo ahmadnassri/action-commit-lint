@@ -40,7 +40,7 @@
     "@commitlint/config-angular-type-enum": "^17.0.0",
     "@commitlint/config-conventional": "^17.4.2",
     "@commitlint/config-lerna-scopes": "^17.4.2",
-    "@commitlint/config-patternplate": "^17.4.2",
+    "@commitlint/config-patternplate": "^17.4.3",
     "@commitlint/lint": "^17.4.2",
     "@commitlint/load": "^17.4.2"
   },
