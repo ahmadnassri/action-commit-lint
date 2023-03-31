@@ -23,6 +23,7 @@ module.exports = async function ({ commits, config = 'conventional' }) {
     core.info(`${sha.slice(-7)}: ${message}`)
 
     const result = await lint.default(message, rules, rawOpts)
+    result.sha = sha
 
     if (result.errors.length > 0) {
       fail = true
