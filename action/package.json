@@ -39,7 +39,7 @@
     "@commitlint/config-angular": "^17.6.0",
     "@commitlint/config-angular-type-enum": "^17.0.0",
     "@commitlint/config-conventional": "^17.6.3",
-    "@commitlint/config-lerna-scopes": "^17.6.2",
+    "@commitlint/config-lerna-scopes": "^17.6.3",
     "@commitlint/config-patternplate": "^17.6.3",
     "@commitlint/lint": "^17.6.1",
     "@commitlint/load": "^17.5.0"
