@@ -13,6 +13,10 @@ permissions: read-all
 jobs:
   main:
     uses: ahmadnassri/actions/.github/workflows/push-action-docker.yml@master
+    secrets:
+      signing-key: ${{ secrets.SSH_KEY }}
+    with:
+      sign-commits: true
     permissions:
       contents: write
       statuses: write
