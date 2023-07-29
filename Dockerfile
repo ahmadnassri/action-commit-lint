@@ -15,7 +15,7 @@ ENTRYPOINT [ "node" ]
 FROM base AS build
 
 # hadolint ignore=DL3018
-RUN apk add --no-cache npm=9.8.1-r0
+RUN apk add --no-cache npm=9.6.6-r0
 
 # slience npm
 # hadolint ignore=DL3059
