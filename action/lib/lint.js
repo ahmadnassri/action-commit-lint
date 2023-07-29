@@ -4,6 +4,8 @@ const lint = require('@commitlint/lint')
 
 const builtInConfig = ['angular-type-enum', 'angular', 'conventional', 'lerna-scopes', 'patternplate']
 
+const messageProps = { title: 'commit-lint' }
+
 module.exports = async function ({ commits, config = 'conventional' }) {
   const file = builtInConfig.includes(config) ? `./config/${config}.js` : config
   const cwd = builtInConfig.includes(config) ? __dirname : process.env.GITHUB_WORKSPACE
@@ -27,11 +29,11 @@ module.exports = async function ({ commits, config = 'conventional' }) {
 
     if (result.errors.length > 0) {
       fail = true
-      result.errors.map(error => core.error(`✖ ${error.message}`))
+      result.errors.map(error => core.error(`✖ ${error.message}`, messageProps))
     }
 
     if (result.warnings.length > 0) {
-      result.warnings.map(warning => core.warning(`⚠ ${warning.message}`))
+      result.warnings.map(warning => core.warning(`⚠ ${warning.message}`, messageProps))
     }
 
     report.push(result)

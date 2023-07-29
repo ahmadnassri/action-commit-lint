@@ -5,15 +5,17 @@ const github = require('@actions/github')
 // modules
 const lint = require('./lib/lint.js')
 
+const messageProps = { title: 'commit-lint' }
+
 // exit early
 if (!['pull_request', 'push'].includes(github.context.eventName)) {
-  core.warning('action triggered outside of a push / pull_request')
+  core.warning(`action ran on unsupported event: ${github.context.eventName}`, messageProps})
   process.exit(0) // soft exit
 }
 
 // error handler
 function errorHandler ({ message, stack }) {
-  core.error(message)
+  core.error(message, messageProps)
   core.debug(stack)
   process.exit(1)
 }
@@ -56,7 +58,7 @@ async function main () {
   }
 
   if (commits.length === 0) {
-    core.error('no commits found')
+    core.error('no commits found', messageProps)
     process.exit(0) // soft exit
   }
 
