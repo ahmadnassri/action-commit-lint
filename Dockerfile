@@ -30,6 +30,8 @@ RUN node install.js
 
 FROM base AS app
 
+RUN useradd -ms /bin/bash node
+
 LABEL com.github.actions.name="Conventional Commit Lint" \
   com.github.actions.description="commitlint your PRs with Conventional style" \
   com.github.actions.icon="search" \
