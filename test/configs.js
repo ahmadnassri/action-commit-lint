@@ -4,7 +4,7 @@ const sinon = require('sinon')
 const core = require('@actions/core')
 
 // module
-const lint = require('../lib/lint.js')
+const lint = require('../src/lint.js')
 
 test('commits -> success', async assert => {
   assert.plan(2)

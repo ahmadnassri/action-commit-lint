@@ -4,7 +4,7 @@ const sinon = require('sinon')
 const core = require('@actions/core')
 
 // module
-const lint = require('../lib/lint.js')
+const lint = require('../src/lint.js')
 
 const commits = [{
   sha: 'ec26c3e57ca3a959ca5aad62de7213c562f8c821',

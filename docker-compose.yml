@@ -22,13 +22,25 @@ services:
       - ./:/data
     command: --defaults=.pandoc.yml
 
-  # ---- app ---- #
+  # ---- action container ---- #
+  action:
+    profiles: ["action"]
+    build: .
+
+  # ---- main container ---- #
   app:
     profiles: ["app"]
-    privileged: true
-    build: .
-    working_dir: /github/workspace
+    image: node:20-alpine
+    working_dir: /app
+    entrypoint: npm --no-update-notifier --no-fund --no-audit
+    command: start
+    tty: true
     volumes:
-      - ./:/github/workspace
+      - ./:/app
     env_file:
       - .env
+
+  test:
+    extends: app
+    profiles: ["test"]
+    command: run test:ci -- --reporter=classic

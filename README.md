@@ -4,7 +4,6 @@ commitlint as a GitHub Action
 
 [![license][license-img]][license-url]
 [![release][release-img]][release-url]
-[![semantic][semantic-img]][semantic-url]
 
 ## Usage
 
@@ -60,9 +59,9 @@ jobs:
 
 > **Notes** *for custom rules*:
 >
-> -   must use `action/checkout` first\_
-> -   `config` is relative to your repo's root
-> -   config file format must follow [`commitlint` configuration format][]
+> - must use `action/checkout` first\_
+> - `config` is relative to your repo's root
+> - config file format must follow [`commitlint` configuration format][]
 
 ### Inputs & Outputs
 
@@ -76,11 +75,11 @@ jobs:
 
 the following are available without any additional requirement
 
--   [`angular-type-enum`][]
--   [`angular`][]
--   [`conventional`][]
--   [`lerna-scopes`][]
--   [`patternplate`][]
+- [`angular-type-enum`][]
+- [`angular`][]
+- [`conventional`][]
+- [`lerna-scopes`][]
+- [`patternplate`][]
 
   [`commitlint` configuration format]: https://commitlint.js.org/#/reference-configuration
   [`angular-type-enum`]: https://github.com/conventional-changelog/commitlint/tree/master/%40commitlint/config-angular-type-enum
@@ -98,6 +97,3 @@ the following are available without any additional requirement
 
 [release-url]: https://github.com/ahmadnassri/action-commit-lint/releases
 [release-img]: https://badgen.net/github/release/ahmadnassri/action-commit-lint
-
-[semantic-url]: https://github.com/ahmadnassri/action-commit-lint/actions?query=workflow%3Arelease
-[semantic-img]: https://badgen.net/badge/📦/semantically%20released/blue

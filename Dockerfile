@@ -22,8 +22,8 @@ RUN apk add --no-cache npm=9.6.6-r0
 RUN npm config set update-notifier=false audit=false fund=false
 
 # install packages
-COPY action/package* ./
-COPY action/install.js ./
+COPY package* ./
+COPY src/install.js ./
 RUN node install.js
 
 # --- app stage --- #
@@ -44,7 +44,7 @@ COPY --from=build /usr/local/lib/node_modules /usr/lib/node
 COPY --from=build /action/node_modules ./node_modules
 
 # copy files
-COPY action ./
+COPY src ./
 
 USER node
 

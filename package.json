@@ -28,6 +28,7 @@
   },
   "main": "index.js",
   "scripts": {
+    "start": "node src/index.js",
     "test": "tap test --no-coverage",
     "test:watch": "tap test --watch",
     "test:ci": "tap test --100",

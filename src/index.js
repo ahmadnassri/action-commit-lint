@@ -3,7 +3,7 @@ const core = require('@actions/core')
 const github = require('@actions/github')
 
 // modules
-const lint = require('./lib/lint.js')
+const lint = require('./lint.js')
 
 const messageProps = { title: 'commit-lint' }
 
