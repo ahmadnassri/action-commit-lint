@@ -9,7 +9,7 @@ const messageProps = { title: 'commit-lint' }
 
 // exit early
 if (!['pull_request', 'push'].includes(github.context.eventName)) {
-  core.warning(`action ran on unsupported event: ${github.context.eventName}`, messageProps})
+  core.warning(`action ran on unsupported event: ${github.context.eventName}`, messageProps)
   process.exit(0) // soft exit
 }
 
