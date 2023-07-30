@@ -30,9 +30,6 @@ RUN node install.js
 
 FROM base AS app
 
-RUN addgroup -g 1000 node \
-  && adduser -u 1000 -G node -s /bin/sh -D node
-
 LABEL com.github.actions.name="Conventional Commit Lint" \
   com.github.actions.description="commitlint your PRs with Conventional style" \
   com.github.actions.icon="search" \
@@ -45,8 +42,6 @@ COPY --from=build /action/node_modules ./node_modules
 
 # copy files
 COPY src ./
-
-USER node
 
 HEALTHCHECK NONE
 
