@@ -16,6 +16,9 @@ readme: clean ## run readme action
 start: ## start the project in foreground
 	@docker compose run --rm app
 
+install: ## install all dependencies
+	@docker compose run --rm app install
+
 test: ## run all npm tests
 	@docker compose run --rm test
 
