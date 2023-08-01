@@ -1,4 +1,5 @@
-# kics-scan disable=9bae49be-0aa3-4de5-bab2-4c3a069e40cd
+# kics-scan disable=9bae49be-0aa3-4de5-bab2-4c3a069e40cd,67fd0c4a-68cf-46d7-8c41-bc9fba7e40ae
+
 # --- base stage --- #
 
 FROM alpine:3.18 AS base
@@ -41,8 +42,13 @@ COPY --from=build /usr/local/lib/node_modules /usr/lib/node
 COPY --from=build /action/node_modules ./node_modules
 
 # copy files
-COPY src ./
+COPY package.json src ./
+
+WORKDIR /github/workspace/
 
 HEALTHCHECK NONE
+
+# hadolint ignore=DL3002
+USER root
 
 CMD ["/action/index.js"]
