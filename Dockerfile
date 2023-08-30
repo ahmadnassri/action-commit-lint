@@ -5,7 +5,7 @@
 FROM alpine:3.18 AS base
 
 # hadolint ignore=DL3018
-RUN apk add --no-cache --update nodejs=18.17.0-r0
+RUN apk add --no-cache --update nodejs=18.17.1-r0
 
 WORKDIR /action
 
