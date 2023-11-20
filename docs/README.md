@@ -12,7 +12,7 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: ahmadnassri/action-commit-lint@v1
+      - uses: ahmadnassri/action-commit-lint@v2
 ```
 
 ###### use different built-in config
@@ -27,7 +27,7 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: ahmadnassri/action-commit-lint@v1
+      - uses: ahmadnassri/action-commit-lint@v2
         with:
           config: angular
 ```
@@ -44,24 +44,25 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v2
-      - uses: ahmadnassri/action-commit-lint@v1
+      - uses: actions/checkout@v4
+      - uses: ahmadnassri/action-commit-lint@v2
         with:
           config: ./path/to/commitlint.config
 ```
 
 > **Notes** _for custom rules_:
-> - must use `action/checkout` first_
+>
+> - must use `action/checkout` first\_
 > - `config` is relative to your repo's root
 > - config file format must follow [`commitlint` configuration format](https://commitlint.js.org/#/reference-configuration)
 
 ### Inputs & Outputs
 
-| output    | type   | required | default        | description                                               |
-| --------- | ------ | -------- | -------------- | --------------------------------------------------------- |
-| `token`   | input  | ❌       | `-`            | The GitHub token used to inspect the pull-request commits |
-| `config`  | input  | ❌       | `conventional` | name of config to use, or path to config file             |
-| `report`  | output | `N/A`    | `-`            | a JSON object with the full `commitlint` report data      |
+| output   | type   | required | default        | description                                               |
+| -------- | ------ | -------- | -------------- | --------------------------------------------------------- |
+| `token`  | input  | ❌       | `-`            | The GitHub token used to inspect the pull-request commits |
+| `config` | input  | ❌       | `conventional` | name of config to use, or path to config file             |
+| `report` | output | `N/A`    | `-`            | a JSON object with the full `commitlint` report data      |
 
 #### built-in configs
 

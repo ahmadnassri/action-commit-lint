@@ -19,7 +19,7 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: ahmadnassri/action-commit-lint@v1
+      - uses: ahmadnassri/action-commit-lint@v2
 ```
 
 ###### use different built-in config
@@ -34,7 +34,7 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: ahmadnassri/action-commit-lint@v1
+      - uses: ahmadnassri/action-commit-lint@v2
         with:
           config: angular
 ```
@@ -51,8 +51,8 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v2
-      - uses: ahmadnassri/action-commit-lint@v1
+      - uses: actions/checkout@v4
+      - uses: ahmadnassri/action-commit-lint@v2
         with:
           config: ./path/to/commitlint.config
 ```
